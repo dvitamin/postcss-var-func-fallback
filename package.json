@@ -9,7 +9,7 @@
     "css-variables"
   ],
   "scripts": {
-    "test": "jest-ci --coverage && eslint-ci ."
+    "test": "jest --coverage && eslint ."
   },
   "author": "dvitamin <dcoding@protonmail.com>",
   "license": "MIT",

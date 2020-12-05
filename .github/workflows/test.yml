@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Run unit tests
-        run: npx jest
+        run: npm test
   short:
     runs-on: ubuntu-latest
     strategy:
