@@ -17,8 +17,8 @@ jobs:
           node-version: 15
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
-      - name: Run tests
-        run: yarn test
+      - name: Run unit tests
+        run: npx test
   short:
     runs-on: ubuntu-latest
     strategy:
