@@ -63,8 +63,8 @@ it('ignores other funcs', async () => {
 
 it('ignores non-funcs', async () => {
   await run(
-    'div{ background-color: aliceblue',
-    'div{ background-color: aliceblue',
+    'div{ background-color: aliceblue }',
+    'div{ background-color: aliceblue }',
     {}
   );
 });
