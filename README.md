@@ -1,4 +1,4 @@
-# PostCSS Var Func Fallback
+# PostCSS var() fallback
 
 [PostCSS] plugin Adds fallback values to var(name) occurences.
 
@@ -38,10 +38,25 @@ and set this plugin in settings.
 ```diff
 module.exports = {
   plugins: [
-+   require('postcss-var-func-fallback'),
++   require('postcss-var-func-fallback')({
++     variables: {
++       '--theme': 'royalblue'
++     }
++   }),
     require('autoprefixer')
   ]
 }
 ```
+
+## Options
+
+### `variables` (default: `{}`)
+
+An object map of variable declarations in JavaScript that will be used to complement var(name) occurences with fallback values.
+
+## Notes
+
+- This plugin fits well when having external css-variable declarations (see [get-css-variables](https://github.com/OlofFredriksson/get-css-variables) plugin for extracting an object map)
+- This plugin don't solve IE11 support (see [postcss-css-variables](https://github.com/MadLittleMods/postcss-css-variables) plugin)
 
 [official docs]: https://github.com/postcss/postcss#usage
