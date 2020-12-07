@@ -26,7 +26,7 @@
 npm install --save-dev postcss postcss-var-func-fallback
 ```
 
-**Step 2:** Check you project for existed PostCSS config: `postcss.config.js`
+**Step 2:** Check your project for existing PostCSS config: `postcss.config.js`
 in the project root, `"postcss"` section in `package.json`
 or `postcss` in bundle config.
 
