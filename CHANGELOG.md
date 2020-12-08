@@ -1,3 +1,3 @@
-# Change Log
+# v1.0.0 - 2020-12-08
 
-This project adheres to [Semantic Versioning](http://semver.org/).
+- First major release after project setup
