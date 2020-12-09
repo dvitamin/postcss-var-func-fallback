@@ -1,12 +1,12 @@
 'use strict';
 
+const postcss = require('postcss');
 const parser = require('postcss-value-parser');
 const processed = Symbol('processed');
 
-module.exports = (opts = { variables: {} }) => {
-  return {
-    postcssPlugin: 'postcss-var-func-fallback',
-    Declaration(decl, { result }) {
+module.exports = postcss.plugin('postcss-var-func-fallback', (opts = { variables: {} }) => {
+  return (root, result) => {
+    root.walkDecls(decl => {
       if (decl[processed] || !decl.value.includes('var(--')) {
         return;
       }
@@ -42,8 +42,6 @@ module.exports = (opts = { variables: {} }) => {
         decl.value = parsedValue.toString();
         decl[processed] = true;
       }
-    }
-  };
-}
-
-module.exports.postcss = true
+    });
+  }
+});
