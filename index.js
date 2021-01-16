@@ -4,9 +4,24 @@ const postcss = require('postcss');
 const parser = require('postcss-value-parser');
 const processed = Symbol('processed');
 
-module.exports = postcss.plugin('postcss-var-func-fallback', (opts = { variables: {} }) => {
+const defaults = {
+  variables: {},
+  treatErrorsAsWarnings: false,
+}
+
+module.exports = postcss.plugin('postcss-var-func-fallback', (options) => {
+  const opts = {...defaults, ...options};
   return (root, result) => {
     root.walkDecls(decl => {
+
+      function failOrWarn(result, text) {
+        if(opts.treatErrorsAsWarnings) {
+          decl.warn(result, text);
+          return;
+        }
+        throw Error(text);
+      }
+
       if (decl[processed] || !decl.value.includes('var(--')) {
         return;
       }
@@ -22,14 +37,14 @@ module.exports = postcss.plugin('postcss-var-func-fallback', (opts = { variables
         const varName = node.nodes[0].value;
 
         if (node.nodes.length > 1) {
-          decl.warn(result, `Fallback value already provided for variable ${varName}`);
+          failOrWarn(result, `Fallback value already provided for variable ${varName}`)
           return;
         }
 
         const varValue = opts.variables[varName];
 
         if (!varValue) {
-          decl.warn(result, `Fallback value not found for variable ${varName}`);
+          failOrWarn(result, `Fallback value not found for variable ${varName}`)
           return;
         }
 
