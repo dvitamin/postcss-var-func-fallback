@@ -54,6 +54,10 @@ module.exports = {
 
 An object map of variable declarations in JavaScript that will be used to complement var(name) occurences with fallback values.
 
+### `failOnWarnings` (default: `false`)
+
+Throws an error if a warning occur.
+
 ## Notes
 
 - This plugin fits well when having external css-variable declarations (see [get-css-variables](https://github.com/OlofFredriksson/get-css-variables) plugin for extracting an object map)

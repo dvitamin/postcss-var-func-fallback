@@ -61,6 +61,22 @@ it('ignores other funcs', async () => {
   );
 });
 
+it('build fails if fallback value not found in variables', async () => {
+  const input = 'a{ border: var(--border-size) solid var(--border-color) }';
+  const opts = {failOnWarnings: true};
+  await expect(postcss([plugin(opts)]).process(input, { from: undefined })).rejects.toThrow("Cannot read property '--border-size' of undefined");
+});
+
+it('build fails if fallback value already provided', async () => {
+  const input = 'a{ border: var(--border-size) solid var(--border-color, orange) }';
+  const opts = {
+    variables: {
+    '--border-size': '1px',
+    '--border-color': 'orange'
+   },failOnWarnings: true};
+  await expect(postcss([plugin(opts)]).process(input, { from: undefined })).rejects.toThrow("Fallback value already provided for variable --border-color");
+});
+
 it('ignores non-funcs', async () => {
   await run(
     'div{ background-color: aliceblue }',
@@ -68,3 +84,4 @@ it('ignores non-funcs', async () => {
     {}
   );
 });
+
