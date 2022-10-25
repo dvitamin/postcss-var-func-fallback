@@ -8,9 +8,14 @@
     "postcss-plugin",
     "css-variables"
   ],
-  "repository": "dvitamin/postcss-var-func-fallback",
+  "homepage": "https://github.com/dvitamin/postcss-var-func-fallback",
+  "bugs": "https://github.com/dvitamin/postcss-var-func-fallback/issues",
+  "repository": "https://github.com/dvitamin/postcss-var-func-fallback.git",
   "license": "MIT",
   "author": "dvitamin <dcoding@protonmail.com>",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "pretest": "eslint .",
     "test": "jest --coverage"
@@ -57,6 +62,7 @@
     "husky": "^4.3.0",
     "jest": "^26.4.2",
     "lint-staged": "^10.4.0",
+    "npm-pkg-lint": "1.11.1",
     "postcss": "^7.0.0"
   },
   "peerDependencies": {
