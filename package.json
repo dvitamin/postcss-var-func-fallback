@@ -14,7 +14,8 @@
   "license": "MIT",
   "author": "dvitamin <dcoding@protonmail.com>",
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "scripts": {
     "pretest": "eslint .",
