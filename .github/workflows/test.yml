@@ -1,12 +1,12 @@
 name: Test
+
 on:
   push:
   pull_request:
-env:
-  FORCE_COLOR: 2
+
 jobs:
-  full:
-    name: Node.js 15 Full
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
@@ -14,28 +14,50 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2-beta
         with:
-          node-version: 15
+          node-version: 16
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: npm ci
       - name: Run unit tests
         run: npm test
-  short:
+
+  node:
+    name: Node.js v${{ matrix.node-version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version:
           - 14
-          - 12
-          - 10
-    name: Node.js ${{ matrix.node-version }} Quick
+          - 16
+          - 18
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v2
-      - name: Install Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2-beta
+        uses: actions/checkout@v3
+      - name: Use Node.js v${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: npm ci
       - name: Run unit tests
-        run: npx jest
+        run: npm test
+
+  postcss:
+    name: PostCSS v${{ matrix.postcss-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        postcss-version:
+          - 7.x
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+      - name: Use Node.js v16
+        uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Install postcss v${{ matrix.postcss-version }}
+        run: |
+          npm install $(npx -y npm-min-peer postcss --major ${{ matrix.postcss-version }} --with-name)
+          npm ls postcss
+      - name: test
+        run: npm test
