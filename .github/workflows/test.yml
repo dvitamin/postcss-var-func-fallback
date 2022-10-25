@@ -51,7 +51,7 @@ jobs:
     strategy:
       matrix:
         postcss-version:
-          - 7.x
+          - 8.x
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
