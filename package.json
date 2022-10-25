@@ -9,7 +9,8 @@
     "css-variables"
   ],
   "scripts": {
-    "test": "jest --coverage && eslint ."
+    "pretest": "eslint .",
+    "test": "jest --coverage"
   },
   "author": "dvitamin <dcoding@protonmail.com>",
   "license": "MIT",
@@ -18,7 +19,7 @@
     "node": ">=10.0.0"
   },
   "peerDependencies": {
-    "postcss": ">=7.0.0"
+    "postcss": "^7"
   },
   "devDependencies": {
     "clean-publish": "^1.1.8",
