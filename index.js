@@ -22,12 +22,12 @@ const plugin = (options = {}) => {
   return {
     postcssPlugin: "postcss-var-func-fallback",
     Declaration(decl, { result }) {
-      function failOrWarn(text) {
+      function failOrWarn(text, name) {
         if (opts.treatErrorsAsWarnings) {
           decl.warn(result, text);
           return;
         }
-        throw Error(text);
+        throw decl.error(text, { word: name });
       }
 
       if (decl[processed] || !decl.value.includes("var(--")) {
@@ -45,14 +45,14 @@ const plugin = (options = {}) => {
         const varName = node.nodes[0].value;
 
         if (node.nodes.length > 1) {
-          failOrWarn(`Fallback value already provided for variable ${varName}`);
+          failOrWarn(`Fallback value already provided for variable ${varName}`, varName);
           return;
         }
 
         const varValue = opts.variables[varName];
 
         if (!varValue) {
-          failOrWarn(`Fallback value not found for variable ${varName}`);
+          failOrWarn(`Fallback value not found for variable ${varName}`, varName);
           return;
         }
 
