@@ -1,6 +1,6 @@
 {
   "name": "postcss-var-func-fallback",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "PostCSS plugin Adds fallback values to var(name) occurences.",
   "keywords": [
     "postcss",
